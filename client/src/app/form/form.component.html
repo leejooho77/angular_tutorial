@@ -1,0 +1,52 @@
+<div class='container'>
+	<h1 class='text-center'>User Form</h1>
+	<form (ngSubmit)='onFormSubmit(userForm)' #userForm='ngForm'>
+		<div class='form-group'>		
+	  		<label for='name'>Name: </label>
+	  		<input type='text' class='form-control' ngModel id='name' name='name' #name='ngModel' placeholder='Your Name' required><br>
+	  	</div>
+	  	<!-- Error section -->
+	  	<div *ngIf="name.invalid && (name.dirty || name.touched)"
+		    class="alert alert-danger">
+		    <div *ngIf = "name.errors?.required">
+		        Name field can't be blank
+		    </div>
+		</div>
+
+		<div class='form-group'>
+	  		<label for='phone'>Phone: </label>
+	  		<input type='text' class='form-control' ngModel id='phone' name='phone' #phone='ngModel' placeholder='1234567890' required><br>
+	  	</div>
+	  	<!-- Error section -->
+	  	<div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+		    class="alert alert-danger">
+		    <div *ngIf = "phone.errors?.required">
+		        Phone field can't be blank
+		    </div>
+		</div>
+
+		<div class='form-group'>
+	  		<label for='email'>Email: </label>
+	  		<input type='text' class='form-control' ngModel id='email' name='email' #email='ngModel' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder='example@example.com' required><br>
+	  	</div>
+	  	<!-- Error section -->
+	  	<div *ngIf="email.invalid && (email.dirty || email.touched)"
+		    class="alert alert-danger">
+		    <div *ngIf = "email.errors?.required">
+		        Email field can't be blank
+		    </div>
+		    <div *ngIf = "email.errors?.pattern">
+		        The email id doesn't seem right
+		    </div>
+		</div>
+
+		<div class='form-group'>
+	  		<label for='city'>City: </label>
+	  		<select class='form-control' ngModel id='city' name='city' required>
+	  			<option *ngFor='let city of cities' [value]='city'>{{city}}</option>
+	  		</select><br>
+	  	</div>
+
+  		<button type='submit' class='btn btn-success' [disabled]='!userForm.form.valid'>Submit</button>
+  	</form>
+</div>
